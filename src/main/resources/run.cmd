@@ -1,0 +1,1 @@
+java -cp bubbleBattle-1.0-SNAPSHOT.jar net.mephi.swtproject.Main
