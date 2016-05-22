@@ -1,15 +1,27 @@
-package net.mephi.swtproject.components;
+package net.mephi.client.components;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
+/**
+ * Класс, запрашивает имя.
+ *
+ * @author Julia
+ * @since 01.01.2016
+ */
 public class InputDialog extends Dialog {
     private String message;
-
+    private Logger log = Logger.getLogger(InputDialog.class);
     private String input;
 
     public InputDialog(Shell parent) {
@@ -18,8 +30,8 @@ public class InputDialog extends Dialog {
 
     public InputDialog(Shell parent, int style) {
         super(parent, style);
-        setText("Input Dialog");
-        setMessage("Please enter a value:");
+        setText("Ввод имени");
+        setMessage("Имя для шара:");
     }
 
     public String getMessage() {
@@ -86,6 +98,7 @@ public class InputDialog extends Dialog {
             public void widgetSelected(SelectionEvent event) {
                 input = null;
                 shell.close();
+                System.exit(0);
             }
         });
 

@@ -1,0 +1,37 @@
+group 'BubleBattle'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task copyRuntimeLibs(type: Copy) {
+    into "build/libs/lib"
+    from configurations.testRuntime
+}
+task copyStartFile(type: Copy) {
+    from 'build/resources/main'
+    into 'build/libs'
+    include '**/*.cmd'
+}
+
+repositories {
+    mavenCentral()
+
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.eclipse.swt', name: 'org.eclipse.swt.win32.win32.x86_64', version: '4.3'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+}
